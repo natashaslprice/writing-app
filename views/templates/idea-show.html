@@ -22,15 +22,14 @@
         </div>
       </form>
     </div> <!-- end of col -->
-  </div> <!-- end of row -->
-  <div class="row" ng-controller="PledgeIndexCtrl">
+  
     <div class="col-sm-12">
       <h3>Pledges</h3>
       <ul class='list-group'>
-        <li ng-repeat="pledge in pledges" class='list-group-item'>
+        <li ng-repeat="pledge in ideaPledges" class='list-group-item'>
           <h4><strong>{{ pledge.amount_pledged }}</strong> by {{ pledge.pledger }}</h4>
           <p>{{pledge.comments}}</p>
-          <a href="#" class='pull-right' ng-click="deleteIdea(idea, $index)">
+          <a href="#" class='pull-right' ng-click="deletePledge(pledge, $index)">
             <i class='icon ion-close-circled'></i>
           </a>
         </li>

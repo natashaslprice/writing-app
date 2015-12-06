@@ -12,7 +12,7 @@ angular.module('myApp.services', [])
   })
 
   .factory('Pledge', function ($window, $resource) {
-    return $resource($window.location.origin + '/api/ideas/:id/pledges', { id: '@id' }, {
+    return $resource($window.location.origin + '/api/ideas/:id/pledges/:pledgeId', { id: '@id' }, {
       update: { method: 'PUT'} 
     });
   });

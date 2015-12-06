@@ -44,9 +44,10 @@ angular.module('myApp.controllers', [])
   .controller('PledgeIndexCtrl', ['Idea', 'Pledge', '$scope', '$stateParams', function (Idea, Pledge, $scope, $stateParams) {
     // GET ALL PLEDGES THROUGH IDEAS
     Idea.get({ id: $stateParams.id }, function(data) {
-      var idea = data;
-      $scope.pledges = idea.pledges;
-      console.log($scope.pledges[0]);
+      console.log("get request", data);
+      var pledges = data.pledges;
+      var pledgesReverse = pledges.reverse();
+      $scope.ideaPledges = pledgesReverse;
     });
 
     // CREATE A PLEDGE
@@ -54,8 +55,18 @@ angular.module('myApp.controllers', [])
       // console.log($stateParams);
       var pledge = new Pledge($scope.pledge);
       pledge.$save({ id: $stateParams.id }, function(data) {
-        $scope.pledges.unshift(data);
+        console.log("pledge", data);
+        $scope.ideaPledges.unshift(data);
+        // console.log("new", $scope.ideaPledges);
         $scope.pledge = {};
       });
     };
+
+    // DELETE A PLEDGE
+    $scope.deletePledge = function(pledge, index) {
+      Pledge.remove({ id: $stateParams.id, pledgeId: pledge._id }, function(data) {
+        $scope.ideaPledges.splice(index, 1);
+      });
+    };
+
   }]);

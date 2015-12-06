@@ -29,9 +29,27 @@ module.exports = function(app) {
 	      if (err) { 
           return res.send(err); 
         }
-        console.log(idea);
-        res.status(201).send(idea);
+        res.send(pledge);
       });
     });
   });
+
+  // DELETE
+  app.delete('/api/ideas/:idea_id/pledges/:pledge_id', function (req, res) {
+  // set the value of the idea and pledge ids
+  var ideaId = req.params.idea_id;
+  var pledgeId = req.params.pledge_id;
+  // console.log("here", ideaId, pledgeId);
+
+  // find idea by id
+  Idea.findOne({_id: ideaId}, function (err, idea) {
+    // find pledge embedded in idea
+    var pledge = idea.pledges.id(pledgeId);
+    // remove pledge
+    pledge.remove();
+    idea.save(function (err, savedIdea) {
+      res.json(pledge);
+    });
+  });
+});
 };
