@@ -23,6 +23,13 @@ angular.module('myApp.controllers', [])
       });
     };
 
+    // EDIT AN IDEA
+    $scope.editIdea = function(idea) {
+      Idea.update({id: idea._id}, idea, function(data) {
+        idea.editForm = false;
+      });
+    };
+
     // DELETE AN IDEA
     $scope.deleteIdea = function(idea, index) {
       Idea.remove({ id: idea._id }, function(data) {

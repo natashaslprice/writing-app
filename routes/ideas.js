@@ -39,7 +39,7 @@ module.exports = function(app) {
 
   // UPDATE ONE IDEA
   app.put('/api/ideas/:idea_id', function(req,res){ 
-    Idea.findOneAndUpdate(req.params.idea_id, req.query.idea, function (err, idea) {
+    Idea.findOneAndUpdate({ _id: req.params.idea_id}, req.query.idea, function (err, idea) {
       if (err) { 
         return res.send(err); 
       }

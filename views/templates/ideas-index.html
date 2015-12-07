@@ -24,12 +24,28 @@
       <h3>Ideas</h3>
       <ul class='list-group'>
         <li ng-repeat="idea in ideas" class='list-group-item'>
-          <h4><a ui-sref="idea-show( { id: idea._id } )"><strong>{{ idea.title }}</strong></a> by {{ idea.author }}</h4>
-          <p>{{idea.description}}</p>
-          <p>Pledge request: {{ idea.amount_required }}</p>
-          <a href="#" class='pull-right' ng-click="deleteIdea(idea, $index)">
-            <i class='icon ion-close-circled'></i>
-          </a>
+          <div class="row">
+            <div class="col-sm-11">
+              <h4><a ui-sref="idea-show( { id: idea._id } )"><strong>{{ idea.title }}</strong></a> by {{ idea.author }}</h4>
+              <p>{{idea.description}}</p>
+              <p>Pledge request: {{ idea.amount_required }}</p>
+            </div>
+            <a href="#" ng-click="idea.editForm=true">
+              <i class='icon ion-edit'></i>
+            </a>
+            <a href="#" ng-click="deleteIdea(idea, $index)">
+              <i class='icon ion-close-circled'></i>
+            </a>
+            <div>
+              <form class='form-group' ng-show="idea.editForm" ng-submit="editIdea(idea)">
+                <input class="form-control" type="text" ng-model="idea.author"/>
+                <input class="form-control" type="text" ng-model="idea.title"/>
+                <textarea class="form-control" type="text-area" ng-model="idea.description"/>
+                <input class="form-control" type="number" ng-model="idea.amount_required"/>
+                <button type="submit" class='btn btn-primary pull-right'>Update</button>
+              </form>
+            </div>
+          </div>
         </li>
       </ul>
     </div> <!-- end of col -->
