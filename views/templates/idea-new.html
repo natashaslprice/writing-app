@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row">
+	  <div class="col-sm-8 col-sm-offset-2">
+	    <h3>Add a Book or Article Idea</h3>
+	    <form ng-submit="createIdea()" class="form-group">
+	      <label for="">What's the name of your idea?</label>
+	      <input type="text" class="form-control" ng-model="idea.title"/>
+	      <label for="">Describe your idea</label>
+	      <textarea class="form-control" ng-model="idea.description"/>
+	      <label for="">What's your name?</label>
+	      <input type="text" class="form-control" ng-model="idea.author"/>
+	      <label for="">Tell us a little about yourself and your writing</label>
+	      <textarea class="form-control" ng-model="idea.author_details"/>
+	      <label for="">How much do you require to be pledged?</label>
+	      <input type="number" class="form-control" ng-model="idea.amount_required"/>      
+	      <br>
+	      <div class="text-right">
+	        <button class='btn btn-primary' type="submit">Create</button>
+	      </div>
+	    </form>
+	  </div> <!-- end of col -->
+</div> <!-- end of row -->
+</div>

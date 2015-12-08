@@ -48,7 +48,8 @@ module.exports = function(app) {
     // remove pledge
     pledge.remove();
     idea.save(function (err, savedIdea) {
-      res.json(pledge);
+      // console.log(idea);
+      res.status(200).send('Success');
     });
   });
 });

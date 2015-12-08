@@ -1,39 +1,67 @@
+<div class="jumbotron text-center" ng-controller="IdeaShowCtrl">
+	<h1>{{ idea.title }}</h1>
+	<h5>by {{ idea.author }}</h5>
+</div>
+
 <div class="container">
-  <div class="row"  ng-controller="IdeaShowCtrl">
-    <div class="col-sm-12">
-      <h3>{{idea.title}}</h3>
-      <p>{{idea.description}}</p>
-      <p>Pledge request: {{ idea.amount_requried }}</p>
+  <div class="row">
+    <div class="col-sm-6" ng-controller="IdeaShowCtrl">
+	    <div class="well">
+	      <h3>The idea:</h3>
+	      <hr>
+	      <p>{{idea.description}}</p>
+	    </div> <!-- end of col -->
+    </div>
+
+    <div class="col-sm-6" ng-controller="PledgeIndexCtrl">
+	    <div class="well">
+	      <h3>Make a pledge</h3>
+	      <p  ng-controller="IdeaShowCtrl">Pledge request: {{ idea.amount_required }}</p>
+	      <p>Amount pledged to date: {{ pledgeTotal }}</p>
+	     </div>
     </div> <!-- end of col -->
   </div> <!-- end of row -->
-  <div class="row" ng-controller="PledgeIndexCtrl">
-    <div class="col-sm-8 col-sm-offset-2">
-      <h3>Pledge</h3>
-      <form ng-submit="createPledge()" class="form-group">
-        <label for="">Name</label>
-        <input class="form-control" type="text" ng-model="pledge.pledger"/>
-        <label for="">Comments</label>
-        <input class="form-control" type="text" ng-model="pledge.comments"/>
-        <label for="">Amount pledged</label>
-        <input class="form-control" type="number" ng-model="pledge.amount_pledged"/>      
-        <br>
-        <div class="text-right">
-          <button class='btn btn-primary' type="submit">Pledge</button>
-        </div>
-      </form>
+
+  <div class="row">
+    <div class="col-sm-6" ng-controller="IdeaShowCtrl">
+	    <div class="well">
+	      <h3>More about the author:</h3>
+	      <hr>
+	      <p>{{idea.author_details}}</p>
+	    </div> 
     </div> <!-- end of col -->
-  
-    <div class="col-sm-12">
-      <h3>Pledges</h3>
-      <ul class='list-group'>
-        <li ng-repeat="pledge in ideaPledges" class='list-group-item'>
-          <h4><strong>{{ pledge.amount_pledged }}</strong> by {{ pledge.pledger }}</h4>
-          <p>{{pledge.comments}}</p>
-          <a href="#" class='pull-right' ng-click="deletePledge(pledge, $index)">
-            <i class='icon ion-close-circled'></i>
-          </a>
-        </li>
-      </ul>
+
+    <div class="col-sm-6" ng-controller="PledgeIndexCtrl">
+	    <div class="well">
+	      <h3>Make a pledge</h3>
+	      <form ng-submit="createPledge()" class="form-group">
+	        <label for="">Name</label>
+	        <input class="form-control" type="text" ng-model="pledge.pledger"/>
+	        <label for="">Comments</label>
+	        <input class="form-control" type="text" ng-model="pledge.comments"/>
+	        <label for="">Amount pledged</label>
+	        <input class="form-control" type="number" ng-model="pledge.amount_pledged"/>      
+	        <br>
+	        <div class="text-right">
+	          <button class='btn btn-primary' type="submit">Pledge</button>
+	        </div>
+	      </form>
+	      <h3>Pledges</h3>
+	      <ul class='list-group'>
+	        <li ng-repeat="pledge in ideaPledges" class='list-group-item'>
+	          <div class="row">
+		          <div class="col-sm-11">
+			          <h4><strong>{{ pledge.amount_pledged }}</strong> by {{ pledge.pledger }}</h4>
+			          <p>{{pledge.comments}}</p>
+			        </div>
+		          <a href="#" ng-click="deletePledge(pledge, $index)">
+		            <i class='ion-trash-b'></i>
+		          </a>
+			      </div>
+	        </li>
+	      </ul>
+	     </div>
     </div> <!-- end of col -->
+
   </div> <!-- end of row -->
 </div>

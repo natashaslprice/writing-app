@@ -1,1 +1,7 @@
-/*PUT YOUR STYLES HERE*/
+i {
+	margin: 0 8px;
+}
+
+.jumbotron {
+	background-color: transparent;
+}

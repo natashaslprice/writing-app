@@ -17,6 +17,12 @@ angular.module('myApp', ['ui.router',
         controller: 'IdeasIndexCtrl'
       })
 
+      .state('idea-new', {
+        url: "/ideas/new",
+        templateUrl: 'templates/idea-new',
+        controller: 'IdeasIndexCtrl'
+      })
+
       .state('idea-show', {
         url: "/ideas/:id",
         templateUrl: 'templates/idea-show',

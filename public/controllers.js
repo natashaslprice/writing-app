@@ -10,7 +10,7 @@ angular.module('myApp.controllers', [])
   }])
 
   // IDEAS INDEX CTRL
-  .controller('IdeasIndexCtrl', ['Idea', '$scope', function (Idea, $scope) {
+  .controller('IdeasIndexCtrl', ['Idea', '$scope', '$location', function (Idea, $scope, $location) {
     // GET ALL IDEAS
     $scope.ideas = Idea.query();
 
@@ -20,6 +20,8 @@ angular.module('myApp.controllers', [])
       idea.$save(function(data) {
         $scope.ideas.unshift(data);
         $scope.idea = {};
+        var ideaId = idea._id
+        $location.path('/ideas/' + ideaId);
       });
     };
 
@@ -51,10 +53,17 @@ angular.module('myApp.controllers', [])
   .controller('PledgeIndexCtrl', ['Idea', 'Pledge', '$scope', '$stateParams', function (Idea, Pledge, $scope, $stateParams) {
     // GET ALL PLEDGES THROUGH IDEAS
     Idea.get({ id: $stateParams.id }, function(data) {
-      console.log("get request", data);
+      // console.log("get request", data);
       var pledges = data.pledges;
       var pledgesReverse = pledges.reverse();
       $scope.ideaPledges = pledgesReverse;
+      // get sum of all pledges made to idea
+      var sum = 0;
+      for (var i = 0; i < $scope.ideaPledges.length; i ++) {
+        sum = sum + $scope.ideaPledges[i].amount_pledged;
+      }
+      $scope.pledgeTotal = sum;
+      // console.log($scope.pledgeTotal);  
     });
 
     // CREATE A PLEDGE
@@ -71,6 +80,7 @@ angular.module('myApp.controllers', [])
 
     // DELETE A PLEDGE
     $scope.deletePledge = function(pledge, index) {
+      // console.log($stateParams.id, pledge._id);
       Pledge.remove({ id: $stateParams.id, pledgeId: pledge._id }, function(data) {
         $scope.ideaPledges.splice(index, 1);
       });

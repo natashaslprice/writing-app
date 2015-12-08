@@ -9,9 +9,10 @@ var mongoose = require('mongoose'),
 var IdeaSchema = new Schema({
     created_at: { type: Date, default: Date.now() },
     updated_at: { type: Date },
-    author: { type: String, required: true, trim: true },
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
+    author: { type: String, required: true, trim: true },
+    author_details: { type: String, required: true, trim: true },
     amount_required: { type: Number, required: true },
     pledges: [Pledge.schema]
 });
